@@ -38,9 +38,6 @@ public abstract class EmployeeServiceAbstract implements EmployeeService {
         return createEmployee(dto);
     }
 
-    public abstract <D> EmployeeResponseCreate createEmployee(D dto);
-    public abstract <D,B> EmployeeDtoBasic updateEmployee(D dto, B identifier);
-
 
     @Override
     public List<EmployeeDtoBasic> findAll(Pageable pageable) {
@@ -107,10 +104,11 @@ public abstract class EmployeeServiceAbstract implements EmployeeService {
 
     protected EmployeeDtoBasic fillMissingFields(Employee employee, EmployeeDtoBasic employeeDtoBasic) {
         String teamName = employeeClient.findTeamNameNaturalId(employee.getPersonalId());
-        LOGGER.info(teamName);
         String teamLeadName = employeeClient.findTeamLeadNameNaturalId(employee.getPersonalId());
-        LOGGER.info(teamLeadName);
         return new EmployeeDtoBasic(employeeDtoBasic, teamName, teamLeadName);
 
     }
+
+    public abstract <D> EmployeeResponseCreate createEmployee(D dto);
+    public abstract <D,B> EmployeeDtoBasic updateEmployee(D dto, B identifier);
 }

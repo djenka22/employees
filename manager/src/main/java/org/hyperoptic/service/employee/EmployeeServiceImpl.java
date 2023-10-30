@@ -42,10 +42,7 @@ public class EmployeeServiceImpl extends EmployeeServiceAbstract {
         updateEmployeeFields(employee, employeeDtoUpdate);
         Employee updatedEmployee = employeeClient.update(employee);
         EmployeeDtoBasic employeeDtoBasic = utilMapper.createEmployeeDtoBasic(updatedEmployee);
-        LOGGER.info(employeeDtoBasic.toString());
-        EmployeeDtoBasic employeeDtoBasicFull = fillMissingFields(updatedEmployee, employeeDtoBasic);
-        LOGGER.info(employeeDtoBasicFull.toString());
-        return employeeDtoBasicFull;
+        return fillMissingFields(updatedEmployee, employeeDtoBasic);
     }
 
 
